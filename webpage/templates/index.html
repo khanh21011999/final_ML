@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CNN</title>
+	<link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+
+<body>
+	<h1 class="header">Are You Human?</h1>
+
+	<div class="boxes">
+		<form class="input-page" enctype="multipart/form-data" action="/classify" method="post">
+			<div class="container box">
+				<h3 align="center">Chọn ảnh</h3><br /><br />
+				<input type="file" name="imageFile" id="imageFile" accept="image/*">
+				<div class="image-preview" id="imagePreview">
+					<img src="" alt="Image Preview" class="image-preview__image">
+					<span class="image-preview__default-text">Image Preview</span>
+				</div>
+				<input class="myButton" type="submit" value="Upload"></button>
+				<h2 class="result" onload="show_alert('{{predict_class}}')">
+					<h3><span>{{predict_class}}</span></h3>
+				</h2>
+			</div>
+		</div>
+	
+		<!--Result output-->
+		<!--form class="output" method="post">
+			<div class="container box">
+				
+			</div>
+		</div-->	
+	</div>
+
+	<script src="{{ url_for('static', filename='CNN.js') }}"></script>
+</body>
+
+</html>

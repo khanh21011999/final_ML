@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+	<title>ATGT</title>
+	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm " style="background-color: black;">
+  		<a class="navbar-brand" href="home.html" style="color: white;">Trang Chủ</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+    		<ul class="navbar-nav">
+      			<li class="nav-item">
+        			<a class="nav-link" href="search.html"  style="color: white;">Tìm kiếm</a>
+      			</li>   
+    		</ul>
+    		<ul class="navbar-nav">
+      			<li class="nav-item">
+        			<a class="nav-link" href="list.html"  style="color: white;">Danh sách</a>
+      			</li>   
+    		</ul>
+  		</div>  
+	</nav>
+
+	<div class="jumbotron text-center" style="background-image: url('https://i.pinimg.com/originals/32/e1/9b/32e19beae11a9068c4da33aedd62b906.jpg'); background-repeat: repeat; background-size: 500px; background-position: center center; margin-top:10px;">
+  		<!--<h1 style="color:white;"> Thêm tên gì đó </h1>
+  		<p style="color:white;">????</p>-->
+	</div>
+
+<script>
+  $.get('https://www.atgt.vn/giao-thong-24h.rss', function (data) {
+    $(data).find("item").each(function () { 
+    	feed = "<div>"
+        var el = $(this);
+        console.log("------------------------");
+        console.log("title      : " + el.find("title").text());
+        console.log("author     : " + el.find("author").text());
+        console.log("description: " + el.find('img').attr('url'));
+        console.log("img: " + el.find("description").text());
+        feed += "<h4>" + "<a target="+"_blank"+" rel="+"noopener noreferrer"+" href="+ el.find("link").text() +">" + el.find("title").text() + "</a></h4>";
+        feed += el.find("description").text() + "<br>";
+        feed += el.find("pubDate").text()
+        feed += "</div> <br>";
+        $('body').append(feed);
+    });
+});
+</script>
+
+</body>

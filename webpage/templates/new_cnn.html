@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+	<title>Human</title>
+	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="D:\CODE\CNN\final_project\finalCNN\homepage\static\styles\CNN2.css">
+</head>
+<body>
+	<div class="jumbotron text-center" style="background-image: url('https://static.wixstatic.com/media/ccfc13_2aa3c140cee54035aef8e3b481fb6868~mv2.png/v1/fill/w_640,h_264,al_c,q_95/ccfc13_2aa3c140cee54035aef8e3b481fb6868~mv2.webp'); background-repeat: no-repeat; background-size: cover; background-position: center center;margin-bottom:0;">
+  		<h1 style="color:white;"> Thêm tên gì đó </h1>
+  		<p style="color:white;">????</p> 
+	</div>
+
+	<nav class="navbar navbar-expand-sm " style="background-color: black;">
+  		<a class="navbar-brand" href="#" style="color: white;">Home</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+    		<ul class="navbar-nav">
+      			<li class="nav-item">
+        			<a class="nav-link" href="#"  style="color: white;">About Us</a>
+      			</li>   
+    		</ul>
+        <form class="navbar-form navbar-left" action="/action_page.php">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search" style="color: white;"></i>
+                </button>
+              </div>
+          </div>
+        </form>
+  		</div>  
+	</nav>
+
+	<div class="container box">
+		<div class="row">
+  			<div class="col-sm-6" style="padding-right:10px; border-right: 2px solid #ccc;">
+      			<h3 align="center">Chọn ảnh</h3><br /><br />
+
+              <div>
+                <button type="button" id="custom-button"> BUTTON </button>
+                  <span id="custom-text"> No file chosen, yet. </span>
+              </div>
+      			<div class="image-preview" id="imagePreview">
+        			<img id="image-preview__image" src="" alt="Image Preview" class="image-preview__image">
+        			<span class="image-preview__default-text"> Image Preview</span>
+      			</div>
+
+      			<form action="" method="POST" enctype="multipart/form-data" name="imgForm" id="imgForm">
+      				<input type="file" name="inpFile" id="inpFile" hidden="hidden">
+      				<input type="submit" name="submit" id="submit">
+      			</form>
+    		</div>
+    		<div id="result" class="col-sm-6">
+    			<h3 align="center">Kết quả</h3><br /><br />
+    			<p class="text-justify" id="res" name="res"></p> 
+    		</div>
+		</div>
+	</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>@Copyright ...</p>
+</div>
+
+<script>
+  $(document).ready(function(){
+
+    inpFile.addEventListener("change", function() {
+  		document.getElementById("res").innerHTML="";
+	});
+
+    $("#imgForm").on('submit', function(e){
+      e.preventDefault();
+      
+      $.ajax({
+        type: "POST",
+        url: "http://536b0cff.ngrok.io/predict",	//can thay doi url
+        data: new FormData(this),
+        cache:false,
+        contentType:false,  
+        processData:false,
+        success: function(data){
+          $.each(data, function(i, element){
+            $("#res").append(element);
+            console.log(element);
+          });
+        },
+        error: function(data){
+          $("#res").text("Error");
+          console.log(element);
+        }
+      });
+      
+    });  
+  });
+</script>
+<script src="D:\CODE\CNN\final_project\finalCNN\homepage\static\CNN2.js"></script>
+</body>
