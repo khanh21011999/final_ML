@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+	<title>ATGT</title>
+	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="style2.css">
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm fixed-top" style="background-color: black;">
+  		<a class="navbar-brand" href="home.html" style="color: white;">Trang Chủ</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+  		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+    		<ul class="navbar-nav">
+      			<li class="nav-item">
+        			<a class="nav-link" href="search.html"  style="color: white;">Tìm kiếm</a>
+      			</li>   
+    		</ul>
+    		<ul class="navbar-nav">
+      			<li class="nav-item">
+        			<a class="nav-link" href="list.html"  style="color: white;">Danh sách</a>
+      			</li>   
+    		</ul>
+  		</div>  
+	</nav>
+
+	
+	
+
+	<div class="jumbotron text-center" style="background-image: url('https://i.pinimg.com/originals/32/e1/9b/32e19beae11a9068c4da33aedd62b906.jpg'); background-repeat: repeat; background-size: 500px; background-position: center center; margin-top:10px;">
+  		<!--<h1 style="color:white;"> Thêm tên gì đó </h1>
+  		<p style="color:white;">????</p>-->
+	</div>
+
+<script>
+
+  var sources = ["https://www.atgt.vn/giao-thong-24h.rss", "https://www.atgt.vn/atgt-dia-phuong.rss", "https://www.atgt.vn/van-hoa-giao-thong.rss", "https://www.atgt.vn/chung-tay-vi-atgt.rss", "https://www.atgt.vn/guong-sang-giao-thong.rss", "https://www.atgt.vn/csgt-ke-chuyen.rss"];
+
+  var source = sources[Math.floor(Math.random() * (sources.length))];
+  console.log(source);
+
+  $.get(source, function (data) {
+
+  	feed = "<div class='row'>"
+  	feed += "<div class='col-sm-3'></div>"
+  	feed += "<div class='col-sm-6'>"
+    $(data).find("item").each(function () { 
+    		
+
+        var el = $(this);
+        /*
+        console.log("------------------------");
+        console.log("title      : " + el.find("title").text());
+        console.log("author     : " + el.find("author").text());
+        console.log("content: " + el.find("content\\:encoded").eq(0).text());
+        */
+        cdata = el.find("content\\:encoded").eq(0).text();
+        
+        feed += "<div style='text-align:center'>" + "<h4>" + "<a target="+"_blank"+" rel="+"noopener noreferrer"+" href="+ el.find("link").text() +">" + el.find("title").text() + "</a></h4>";
+        feed += el.find("description").text() + "<br>";
+        feed += el.find("pubDate").text()
+        feed += "</div> <br>";
+        feed += cdata.substring(0, cdata.indexOf("<p>"));
+        feed += "<br> <br>"
+        
+    });
+    feed += "</div>"
+    feed += "<div class='col-sm-3'></div>"
+    feed += "</div>"
+    $('body').append(feed);
+    $('body').append("<a class='gotop' href='#'><i class='fas fa-arrow-up'></i></a>");
+});
+</script>
+
+</body>
