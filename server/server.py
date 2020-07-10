@@ -1,4 +1,3 @@
-from flask_ngrok import run_with_ngrok
 from flask import Flask
 from flask import request, redirect
 from flask import jsonify
@@ -12,7 +11,7 @@ from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
-run_with_ngrok(app)
+
 
 model=tf.keras.models.load_model('trained-model.h5',compile=False)
 
